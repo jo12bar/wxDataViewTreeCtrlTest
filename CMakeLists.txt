@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.21)
 
 #
 # Project details
 #
 
 project(
-  "Project"
+	"WxDataViewTreeCtrlTest"
   VERSION 0.1.0
   LANGUAGES CXX
 )
@@ -23,7 +23,7 @@ endif()
 message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
 if (UNIX)
-    add_compile_options("$<$<CONFIG:DEBUG>:-D_DEBUG>")    #this will allow to use same _DEBUG macro available in both Linux as well as Windows - MSCV environment. Easy to put Debug specific code.
+	add_compile_options("$<$<CONFIG:DEBUG>:-D_DEBUG>")    #this will allow to use same _DEBUG macro available in both Linux as well as Windows - MSVC environment. Easy to put Debug specific code.
 endif (UNIX)
 
 
@@ -62,6 +62,7 @@ include(cmake/Vcpkg.cmake)
 include(cmake/SourcesAndHeaders.cmake)
 
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+  verbose_message("Building an executable!")
   add_executable(${PROJECT_NAME} ${exe_sources})
 
   if(${PROJECT_NAME}_VERBOSE_OUTPUT)
@@ -174,6 +175,24 @@ include(cmake/Doxygen.cmake)
 #      dependency1 ...
 #  )
 #endif()
+
+if(MSVC)
+  add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
+
+find_package(wxWidgets REQUIRED)
+
+target_include_directories(
+  ${PROJECT_NAME}
+  PRIVATE
+    ${wxWidgets_INCLUDE_DIRS}
+)
+
+target_link_libraries(
+  ${PROJECT_NAME}
+  PRIVATE
+    ${wxWidgets_LIBRARIES}
+)
 
 # For Windows, it is necessary to link with the MultiThreaded library.
 # Depending on how the rest of the project's dependencies are linked, it might be necessary

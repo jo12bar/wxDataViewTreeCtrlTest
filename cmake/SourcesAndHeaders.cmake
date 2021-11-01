@@ -1,16 +1,22 @@
+set(wxFormBuilder_sources
+	wxFormBuilder/MainFrameBase.cpp
+)
+
 set(sources
-    src/tmp.cpp
+	src/helpers.cpp
+	${wxFormBuilder_sources}
 )
 
 set(exe_sources
-		src/main.cpp
-		${sources}
+	src/main.cpp
+	${sources}
 )
 
 set(headers
-    include/project/tmp.hpp
+	include/wxdataviewtreectrltest/helpers.hpp
+	wxFormBuilder/MainFrameBase.h
 )
 
 set(test_sources
-  src/tmp_test.cpp
+	""
 )
