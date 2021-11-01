@@ -43,7 +43,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          submodules: recursive
+          submodules: "recursive"
 
       - name: cache dependencies
         uses: actions/cache@v2
