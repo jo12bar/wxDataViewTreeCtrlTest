@@ -39,10 +39,10 @@ jobs:
           cd ../wxDataViewTreeCtrlTest
 
       - name: configure
-        run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION" -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_target_triplet }}
+        run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$HOME/$env:INSTALL_LOCATION" -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
 
       - name: build
-        run: cmake --build build --config "$env:BUILD_TYPE" -j4 -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.config.vcpkg_target_triplet }}
+        run: cmake --build build --config "$env:BUILD_TYPE" -j4 -DCMAKE_TOOLCHAIN_FILE="$env:GITHUB_WORKSPACE/vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows
 
       - name: run tests
         run: |
